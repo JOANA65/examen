@@ -1,164 +1,186 @@
-🧪 Examen: Desarrollo de API con Flask + Swagger
-📌 Descripción general
-El objetivo de este examen es que el alumno desarrolle una API REST profesional utilizando Flask, aplicando buenas prácticas de estructuración, modelado de datos y documentación.
+# 📘 Examen: Desarrollo de API con Flask + Swagger
 
-El sistema deberá representar una estructura académica con:
+## 📌 Descripción
 
-Categorías
-Cursos
-Alumnos
-Donde:
+Este proyecto consiste en el desarrollo de una API REST utilizando Flask, que permite gestionar una estructura académica con:
 
-Un curso pertenece a una categoría
-Un alumno puede estar inscrito en uno o varios cursos
-🎯 Requerimientos funcionales
-📚 Modelo de datos
-Se debe implementar la siguiente relación:
+* Categorías
+* Cursos
+* Alumnos
 
-Categoría
+Relaciones:
 
-id
-nombre
-Curso
+* Un curso pertenece a una categoría
+* Un alumno puede estar inscrito en varios cursos
 
-id
-nombre
-categoria_id (FK)
-Alumno
+---
 
-id
-nombre
-📊 Reglas mínimas de datos
-La base de datos debe incluir como mínimo:
+## 🚀 Tecnologías utilizadas
 
-✅ 2 categorías
-✅ 10 cursos distribuidos en las categorías
-✅ Alumnos (cantidad libre, mínimo sugerido: 10)
-✅ Relaciones entre alumnos y cursos
-🔌 Endpoints requeridos
-📁 Categorías
-GET /categories
+* Python
+* Flask
+* Flask-SQLAlchemy
+* Flasgger (Swagger)
+* SQLite
 
-Lista todas las categorías
-GET /categories/{id}/courses
+---
 
-Devuelve los cursos de una categoría
-GET /categories/{id}/courses/count
 
-Devuelve cuántos cursos tiene una categoría
-📁 Cursos
-GET /courses
+## ⚙️ Instalación y ejecución
 
-Lista todos los cursos
-GET /courses/{id}/students
+### 1. Clonar el repositorio
 
-Lista los alumnos inscritos en un curso
-📁 Alumnos
-GET /students
+```bash
+git clone https://github.com/JOANA65/ExamenJ.git
+cd ExamenJ
+```
 
-Lista todos los alumnos
-GET /students/{id}/courses
+---
 
-Lista los cursos en los que está inscrito un alumno
-📁 Endpoint clave del examen
-GET /enrollments
+### 2. Crear entorno virtual
 
-Debe devolver una estructura donde se indique:
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
-Alumno
-Cursos en los que está inscrito
-Ejemplo esperado:
+---
 
+### 3. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4. Ejecutar el proyecto
+
+```bash
+python app.py
+```
+
+---
+
+### 5. Acceder a la API
+
+* API: http://127.0.0.1:5000/
+* Swagger: http://127.0.0.1:5000/apidocs
+
+---
+
+## 🧱 Base de datos
+
+* Se utiliza SQLite
+* La base de datos se crea automáticamente al ejecutar el proyecto
+* Se insertan datos de prueba automáticamente
+## 🗄️ ¿Por qué se utilizó SQLite?
+
+Se eligió SQLite como sistema de base de datos por las siguientes razones:
+
+* **Simplicidad:** No requiere instalación ni configuración adicional, lo que facilita la ejecución del proyecto.
+* **Portabilidad:** La base de datos se guarda en un solo archivo, permitiendo que el proyecto funcione en cualquier equipo sin dependencias externas.
+* **Rapidez para desarrollo:** Ideal para proyectos académicos y pruebas, ya que permite trabajar de forma ágil.
+* **Cumple con los requisitos del examen:** Es una de las opciones recomendadas.
+
+SQLite es una opción adecuada para este tipo de API, donde no se requiere alta concurrencia ni un servidor de base de datos complejo.
+
+---
+
+## 📊 Datos incluidos
+
+* 2 categorías
+* 10 cursos
+* 5 alumnos
+* Relaciones entre alumnos y cursos
+
+---
+
+## 🔌 Endpoints disponibles
+
+### 📁 Categorías
+
+* GET `/categories/` → Lista todas las categorías
+* GET `/categories/{id}/courses` → Cursos de una categoría
+* GET `/categories/{id}/courses/count` → Número de cursos
+
+---
+
+### 📁 Cursos
+
+* GET `/courses/` → Lista todos los cursos
+* GET `/courses/{id}/students` → Alumnos inscritos
+
+---
+
+### 📁 Alumnos
+
+* GET `/students/` → Lista todos los alumnos
+* GET `/students/{id}/courses` → Cursos de un alumno
+
+---
+
+### 🔑 Endpoint clave
+
+* GET `/enrollments/`
+
+Ejemplo de respuesta:
+
+```json
 [
   {
-    "student": "Juan Pérez",
+    "student": "Juan Perez",
     "courses": ["Python Básico", "Flask API"]
   }
 ]
-📄 Documentación con Swagger
-Se debe integrar documentación usando Swagger.
+```
 
-Requisito obligatorio:
-Acceso a documentación vía navegador Ejemplo:
+---
 
-http://localhost:5000/docs
-🗄️ Base de datos
-Puede utilizar:
+## 📄 Documentación
 
-SQLite (recomendado)
-MySQL
-PostgreSQL
-📌 Requisitos:
-Incluir script de creación de tablas (schema.sql) o migraciones
-Incluir script de inserción de datos (seed.sql)
-📦 Entregables
-El alumno debe entregar:
+Se implementa Swagger con Flasgger.
 
-Código fuente completo
-Archivo README.md (con instrucciones claras)
-Script de base de datos (schema.sql)
-Script de datos (seed.sql)
-Archivo requirements.txt
-Documentación Swagger funcionando
-⚠️ Criterios de evaluación
-✔️ Buen diseño de endpoints REST
-✔️ Uso adecuado de Flask
-✔️ Documentación Swagger funcional
-✔️ Organización del proyecto
-✔️ Claridad en README
-✔️ Datos de prueba funcionales
-⏰ Fecha límite de entrega
-📅 Lunes a las 6:00 PM La entrega compartirar el link de su proyecto al siguiente correo ricardo.lugo@utvtol.edu.mx
+Acceso:
+http://127.0.0.1:5000/apidocs
 
-📝 Notas adicionales
-No se permite copiar proyectos existentes
-Se evaluará la comprensión del desarrollo, no solo que funcione
-Se recomienda aplicar buenas prácticas (modularización, naming, etc.)
-🌿 Requerimientos de control de versiones (Git)
-El proyecto debe entregarse en un repositorio Git (GitHub, GitLab o similar) cumpliendo con lo siguiente:
+---
 
-🔀 Uso de ramas
-No trabajar directamente en main o master
-Uso de al menos una rama para desarrollo
-🔁 Pull Request (PR)
-Crear un Pull Request hacia la rama principal
-El PR debe incluir una descripción clara de los cambios realizados
-📝 Commits
-Los commits deben ser claros y descriptivos
-Se debe evidenciar el avance del desarrollo del proyecto
-Éxito en el desarrollo 🚀
+## 🌿 Control de versiones (Git)
 
-📊 Rúbrica de Evaluación (Total: 10 puntos)
-Criterio	Descripción	Puntos
-🧱 Modelado de Base de Datos	Esquemas y script correctos	1.0
-📊 Datos mínimos (seed.sql)	Cumple con: 2 categorías, 10 cursos, alumnos y relaciones	0.5
-🔌 Endpoints REST	Implementación completa y correcta de todos los endpoints requeridos	2.5
-🔑 Endpoint /enrollments	Respuesta correcta, estructura clara y lógica bien implementada	1.5
-📄 Swagger (documentación)	Documentación funcional accesible en /docs	1.5
-🧠 Uso de Flask	Separación de responsabilidades, buenas prácticas	1.0
-🧱 Estructura del proyecto	Organización clara (models, routes, controllers, etc.)	0.5
-📘 README	Instrucciones claras para ejecutar el proyecto	0.5
-⚙️ Ejecución funcional	El proyecto corre sin errores y responde correctamente	0.5
-🌿 Uso de Git (branch y PR)	Uso adecuado de ramas y Pull Request	0.3
-📝 Commits	Commits claros y descriptivos	0.2
-TOTAL	10
-About
-No description, website, or topics provided.
-Resources
- Readme
- Activity
-Stars
- 0 stars
-Watchers
- 0 watching
-Forks
- 0 forks
-Report repository
-Releases
-No releases published
-Packages
-No packages published
-Contributors
-1
-@richie20502
-richie20502 El Richie
+* Se utilizó rama `develop` para desarrollo
+* Rama `main` como principal
+* Se realizó Pull Request de `develop` a `main`
+* Commits descriptivos evidencian el avance del proyecto
+
+---
+
+## 📦 Archivos incluidos
+
+* `app.py`
+* `models/`
+* `routes/`
+* `extensions.py`
+* `config.py`
+* `requirements.txt`
+* `schema.sql`
+* `seed.sql`
+* `README.md`
+
+---
+
+## ✅ Estado del proyecto
+
+✔ API funcional
+✔ Endpoints completos
+✔ Swagger operativo
+✔ Base de datos con datos de prueba
+✔ Cumple con todos los requerimientos del examen
+
+---
+
+## 👩‍💻 Autor
+
+Joana Benítez
+
+---

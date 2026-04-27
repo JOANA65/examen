@@ -8,23 +8,22 @@ def create_app():
 
     db.init_app(app)
 
-    # 🔥 Crear BD y datos
+    # 🔥 Crear BD y datos automáticamente
     with app.app_context():
         from models.models import Category, Course, Student
 
         db.create_all()
 
-        # Insertar datos si la BD está vacía
         if not Category.query.first():
 
-            # Categorías
+            # 📁 Categorías
             cat1 = Category(name="Programación")
             cat2 = Category(name="Diseño")
 
             db.session.add_all([cat1, cat2])
             db.session.commit()
 
-            # Cursos
+            # 📚 Cursos
             courses = [
                 Course(name="Python Básico", category_id=cat1.id),
                 Course(name="Flask API", category_id=cat1.id),
@@ -41,7 +40,7 @@ def create_app():
             db.session.add_all(courses)
             db.session.commit()
 
-            # Alumnos
+            # 👨‍🎓 Alumnos
             students = [
                 Student(name="Juan Perez"),
                 Student(name="Maria Lopez"),
@@ -53,7 +52,7 @@ def create_app():
             db.session.add_all(students)
             db.session.commit()
 
-            # Inscripciones
+            # 🔗 Inscripciones
             students[0].courses.append(courses[0])
             students[0].courses.append(courses[1])
 
@@ -71,8 +70,34 @@ def create_app():
 
             db.session.commit()
 
-    Swagger(app)
+    # 🔥 CONFIGURACIÓN CORRECTA DE SWAGGER
+    swagger_template = {
+        "swagger": "2.0",
+        "info": {
+            "title": "API Examen Flask",
+            "description": "Documentación de la API académica",
+            "version": "1.0"
+        }
+    }
 
+    swagger_config = {
+        "headers": [],
+        "specs": [
+            {
+                "endpoint": "apispec_1",
+                "route": "/apispec_1.json",
+                "rule_filter": lambda rule: True,
+                "model_filter": lambda tag: True,
+            }
+        ],
+        "static_url_path": "/flasgger_static",
+        "swagger_ui": True,
+        "specs_route": "/docs/"
+    }
+
+    Swagger(app, template=swagger_template, config=swagger_config)
+
+    # 🔌 Blueprints
     from routes.categories import categories_bp
     from routes.courses import courses_bp
     from routes.students import students_bp
@@ -84,6 +109,7 @@ def create_app():
     app.register_blueprint(enrollments_bp)
 
     return app
+
 
 app = create_app()
 

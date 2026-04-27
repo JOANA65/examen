@@ -13,10 +13,10 @@ mkdir examen
 cd examen
 ```
 
-Crear archivo README:
+Crear archivo README desde la raiz de tu proyecto:
 
 ```bash
-type nul > README.md
+README.md
 ```
 
 ---

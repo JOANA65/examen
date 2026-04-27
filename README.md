@@ -293,11 +293,7 @@ Swagger implementado con Flasgger:
 
 * Implementación de rutas REST
 
-### 🔹 Documentación
-
-* README completo
-
----
+![alt text](image.png)
 
 ## 📦 Archivos incluidos
 

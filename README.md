@@ -1,164 +1,328 @@
-🧪 Examen: Desarrollo de API con Flask + Swagger
-📌 Descripción general
-El objetivo de este examen es que el alumno desarrolle una API REST profesional utilizando Flask, aplicando buenas prácticas de estructuración, modelado de datos y documentación.
+# 📘 Examen: Desarrollo de API con Flask + Swagger
 
-El sistema deberá representar una estructura académica con:
+---
 
-Categorías
-Cursos
-Alumnos
-Donde:
+## 🛠️ Desarrollo del Proyecto (Paso a Paso)
 
-Un curso pertenece a una categoría
-Un alumno puede estar inscrito en uno o varios cursos
-🎯 Requerimientos funcionales
-📚 Modelo de datos
-Se debe implementar la siguiente relación:
+### 📌 Paso 1: Creación del proyecto
 
-Categoría
+En la terminal:
 
-id
-nombre
-Curso
+```bash
+mkdir examen
+cd examen
+```
 
-id
-nombre
-categoria_id (FK)
-Alumno
+Crear archivo README desde la raiz de tu proyecto:
 
-id
-nombre
-📊 Reglas mínimas de datos
-La base de datos debe incluir como mínimo:
+```bash
+README.md
+```
 
-✅ 2 categorías
-✅ 10 cursos distribuidos en las categorías
-✅ Alumnos (cantidad libre, mínimo sugerido: 10)
-✅ Relaciones entre alumnos y cursos
-🔌 Endpoints requeridos
-📁 Categorías
-GET /categories
+---
 
-Lista todas las categorías
-GET /categories/{id}/courses
+### 🌿 Paso 2: Inicializar repositorio Git
 
-Devuelve los cursos de una categoría
-GET /categories/{id}/courses/count
+```bash
+git init
+git add .
+git commit -m "Inicialización del proyecto"
+git branch -M main
+```
 
-Devuelve cuántos cursos tiene una categoría
-📁 Cursos
-GET /courses
+Conectar con GitHub:
 
-Lista todos los cursos
-GET /courses/{id}/students
+```bash
+git remote add origin https://github.com/JOANA65/ExamenJ.git
+```
 
-Lista los alumnos inscritos en un curso
-📁 Alumnos
-GET /students
+---
 
-Lista todos los alumnos
-GET /students/{id}/courses
+### 🔀 Paso 3: Crear rama de desarrollo
 
-Lista los cursos en los que está inscrito un alumno
-📁 Endpoint clave del examen
-GET /enrollments
+```bash
+git checkout -b develop
+git push -u origin develop
+```
 
-Debe devolver una estructura donde se indique:
+---
 
-Alumno
-Cursos en los que está inscrito
-Ejemplo esperado:
+### 🐍 Paso 4: Crear entorno virtual
 
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+Guardar avance:
+
+```bash
+git add .
+git commit -m "Entorno virtual creado"
+git push origin develop
+```
+
+---
+
+### 📦 Paso 5: Instalación de dependencias
+
+```bash
+pip install flask
+pip install flask-sqlalchemy
+pip install flasgger
+pip install gunicorn
+```
+
+Guardar dependencias:
+
+```bash
+pip freeze > requirements.txt
+```
+
+Guardar en Git:
+
+```bash
+git add .
+git commit -m "Se agregan dependencias y requirements.txt"
+git push origin develop
+```
+
+---
+
+### 🧱 Paso 6: Estructura del proyecto
+
+```text
+examen/
+│
+├── app.py
+├── config.py
+├── extensions.py
+├── requirements.txt
+├── README.md
+│
+├── models/
+│   └── models.py
+│
+├── routes/
+│   ├── categories.py
+│   ├── courses.py
+│   ├── students.py
+│   └── enrollments.py
+```
+
+---
+
+## 📌 Descripción
+
+Este proyecto consiste en el desarrollo de una API REST utilizando Flask, que permite gestionar una estructura académica con:
+
+* Categorías
+* Cursos
+* Alumnos
+
+### 🔗 Relaciones:
+
+* Un curso pertenece a una categoría
+* Un alumno puede estar inscrito en varios cursos
+
+---
+
+## 🚀 Tecnologías utilizadas
+
+* Python
+* Flask
+* Flask-SQLAlchemy
+* Flasgger (Swagger)
+* SQLite
+
+---
+
+## ⚙️ Instalación y ejecución
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/JOANA65/ExamenJ.git
+cd ExamenJ
+```
+
+---
+
+### 2. Crear entorno virtual
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+---
+
+### 3. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4. Ejecutar el proyecto
+
+```bash
+python app.py
+```
+
+---
+
+### 5. Acceso
+
+* API → http://127.0.0.1:5000/
+* Swagger → http://127.0.0.1:5000/docs
+
+---
+
+## 🧱 Base de datos
+
+* Se utiliza SQLite
+* Se crea automáticamente al ejecutar el proyecto
+* Se insertan datos de prueba automáticamente
+
+### 📊 Datos incluidos:
+
+* 2 categorías
+* 10 cursos
+* 5 alumnos
+* Relaciones entre alumnos y cursos
+
+---
+
+## 🗄️ ¿Por qué SQLite?
+
+Se eligió SQLite por:
+
+* ✔ No requiere instalación
+* ✔ Fácil de usar
+* ✔ Portabilidad (archivo único)
+* ✔ Ideal para proyectos académicos
+* ✔ Cumple con los requisitos del examen
+
+---
+
+## 🔌 Endpoints
+
+### 📁 Categorías
+
+* GET `/categories/`
+* GET `/categories/{id}/courses`
+* GET `/categories/{id}/courses/count`
+
+### 📁 Cursos
+
+* GET `/courses/`
+* GET `/courses/{id}/students`
+
+### 📁 Alumnos
+
+* GET `/students/`
+* GET `/students/{id}/courses`
+
+### 🔑 Endpoint clave
+
+* GET `/enrollments/`
+
+Ejemplo:
+
+```json
 [
   {
-    "student": "Juan Pérez",
+    "student": "Juan Perez",
     "courses": ["Python Básico", "Flask API"]
   }
 ]
-📄 Documentación con Swagger
-Se debe integrar documentación usando Swagger.
+```
 
-Requisito obligatorio:
-Acceso a documentación vía navegador Ejemplo:
+---
 
-http://localhost:5000/docs
-🗄️ Base de datos
-Puede utilizar:
+## 📄 Documentación
 
-SQLite (recomendado)
-MySQL
-PostgreSQL
-📌 Requisitos:
-Incluir script de creación de tablas (schema.sql) o migraciones
-Incluir script de inserción de datos (seed.sql)
-📦 Entregables
-El alumno debe entregar:
+Swagger implementado con Flasgger:
 
-Código fuente completo
-Archivo README.md (con instrucciones claras)
-Script de base de datos (schema.sql)
-Script de datos (seed.sql)
-Archivo requirements.txt
-Documentación Swagger funcionando
-⚠️ Criterios de evaluación
-✔️ Buen diseño de endpoints REST
-✔️ Uso adecuado de Flask
-✔️ Documentación Swagger funcional
-✔️ Organización del proyecto
-✔️ Claridad en README
-✔️ Datos de prueba funcionales
-⏰ Fecha límite de entrega
-📅 Lunes a las 6:00 PM La entrega compartirar el link de su proyecto al siguiente correo ricardo.lugo@utvtol.edu.mx
+👉 http://127.0.0.1:5000/docs
 
-📝 Notas adicionales
-No se permite copiar proyectos existentes
-Se evaluará la comprensión del desarrollo, no solo que funcione
-Se recomienda aplicar buenas prácticas (modularización, naming, etc.)
-🌿 Requerimientos de control de versiones (Git)
-El proyecto debe entregarse en un repositorio Git (GitHub, GitLab o similar) cumpliendo con lo siguiente:
+---
 
-🔀 Uso de ramas
-No trabajar directamente en main o master
-Uso de al menos una rama para desarrollo
-🔁 Pull Request (PR)
-Crear un Pull Request hacia la rama principal
-El PR debe incluir una descripción clara de los cambios realizados
-📝 Commits
-Los commits deben ser claros y descriptivos
-Se debe evidenciar el avance del desarrollo del proyecto
-Éxito en el desarrollo 🚀
+## 🌿 Control de versiones
 
-📊 Rúbrica de Evaluación (Total: 10 puntos)
-Criterio	Descripción	Puntos
-🧱 Modelado de Base de Datos	Esquemas y script correctos	1.0
-📊 Datos mínimos (seed.sql)	Cumple con: 2 categorías, 10 cursos, alumnos y relaciones	0.5
-🔌 Endpoints REST	Implementación completa y correcta de todos los endpoints requeridos	2.5
-🔑 Endpoint /enrollments	Respuesta correcta, estructura clara y lógica bien implementada	1.5
-📄 Swagger (documentación)	Documentación funcional accesible en /docs	1.5
-🧠 Uso de Flask	Separación de responsabilidades, buenas prácticas	1.0
-🧱 Estructura del proyecto	Organización clara (models, routes, controllers, etc.)	0.5
-📘 README	Instrucciones claras para ejecutar el proyecto	0.5
-⚙️ Ejecución funcional	El proyecto corre sin errores y responde correctamente	0.5
-🌿 Uso de Git (branch y PR)	Uso adecuado de ramas y Pull Request	0.3
-📝 Commits	Commits claros y descriptivos	0.2
-TOTAL	10
-About
-No description, website, or topics provided.
-Resources
- Readme
- Activity
-Stars
- 0 stars
-Watchers
- 0 watching
-Forks
- 0 forks
-Report repository
-Releases
-No releases published
-Packages
-No packages published
-Contributors
-1
-@richie20502
-richie20502 El Richie
+* Rama principal: `main`
+* Desarrollo en: `develop`
+* Se realizó Pull Request de `develop` a `main`
+* Commits claros y progresivos
+
+---
+
+## 📝 Detalle de commits
+
+### 🔹 Inicialización del proyecto
+
+* Creación del repositorio
+* Archivo README.md
+
+### 🔹 Entorno virtual
+
+* Configuración del entorno de desarrollo
+
+### 🔹 Dependencias
+
+* Archivo requirements.txt
+
+### 🔹 Aplicación principal
+
+* Configuración de Flask
+* Conexión a base de datos
+
+### 🔹 Configuración base
+
+* config.py
+* extensions.py
+
+### 🔹 Modelos
+
+* Definición de entidades
+* Scripts SQL
+
+### 🔹 Endpoints
+
+* Implementación de rutas REST
+
+### 🔹 Documentación
+
+* README completo
+
+---
+
+## 📦 Archivos incluidos
+
+* app.py
+* models/
+* routes/
+* config.py
+* extensions.py
+* requirements.txt
+* schema.sql
+* seed.sql
+* README.md
+
+---
+
+## ✅ Estado del proyecto
+
+✔ API funcional
+✔ Endpoints completos
+✔ Swagger operativo en `/docs`
+✔ Base de datos automática
+✔ Cumple todos los requisitos
+
+---
+
+## 👩‍💻 Autor
+
+Joana Benítez
